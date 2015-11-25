@@ -5,21 +5,36 @@ app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
 
+
 class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     social_facebook = db.Column(db.Integer())
-    social_linkedin = db.Column(db.Integer())
-    social_google = db.Column(db.Integer())
-    trusted_paypal = db.Column(db.Integer())
-    trusted_amazon = db.Column(db.Integer())
+    social_linkedin = db.column(db.Integer())
+    social_google = db.column(db.Integer())
+    trusted_paypal = db.column(db.Integer())
+    trusted_amazon = db.column(db.Integer())
     trusted_localbitcoins = db.Column(db.Integer())
     trusted_ebay = db.Column(db.Integer())
     countryId = db.Column(db.String(140))
     salary = db.Column(db.String(140))
 
-    def __init__(self, **kwargs):
-        pass
+    def __init__(self, social_facebook,
+                 social_linkedin,
+                 social_google,
+                 trusted_paypal,
+                 trusted_amazon,
+                 trusted_localbitcoins,
+                 trusted_ebay,
+                 countryId, salary):
+        self.social_facebook = social_facebook
+        self.social_linkedin = social_linkedin
+        self.trusted_paypal = trusted_paypal
+        self.trusted_amazon = trusted_amazon
+        self.trusted_localbitcoins = trusted_localbitcoins
+        self.trusted_ebay = trusted_ebay
+        self.countryId = countryId
+        self.salary = salary
 
     def __repr(self):
         return "<user {0}>".format(self.social_facebook)
@@ -46,13 +61,14 @@ class Loan(db.Model):
     borrower = db.Column(db.Integer)
     rating = db.Column(db.Integer())
 
-
-
     def __repr__(self, id):
         return '<Loan %r>' % self.id
 
 db.create_all()
-l = Loan(id=12234, createdAt=datetime.datetime.utcnow(), type="xD", title="ebin")
+l = Loan(id=12234,
+         createdAt=datetime.datetime.utcnow(),
+         type="xD",
+         title="ebin")
 db.session.add(l)
 db.session.commit()
 l2 = Loan.query.first()
