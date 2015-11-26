@@ -27,14 +27,14 @@ class User(db.Model):
                  trusted_localbitcoins,
                  trusted_ebay,
                  countryId, salary):
-        self.social_facebook = social_facebook social_facebook
-        self.social_linkedin = social_linkedin social_linkedin
-        self.trusted_paypal = trusted_paypal trusted_paypal
-        self.trusted_amazon = trusted_amazon trusted_amazon
-        self.trusted_localbitcoins = trusted_localbitcoins trusted_localbitcoins
-        self.trusted_ebay = trusted_ebay trusted_ebay
-        self.countryId = countryId countryId
-        self.salary = salary salary
+        self.social_facebook = social_facebook
+        self.social_linkedin = social_linkedin
+        self.trusted_paypal = trusted_paypal
+        self.trusted_amazon = trusted_amazon
+        self.trusted_localbitcoins = trusted_localbitcoins
+        self.trusted_ebay = trusted_ebay
+        self.countryId = countryId
+        self.salary = salary
 
     def __repr(self):
         return "<user {0}>".format(self.social_facebook)
@@ -80,22 +80,22 @@ class Loan(db.Model):
                  votes,
                  borrower,
                  rating):
-                 self.id = id 
-                 self.title = title 
-                 self.description = description 
-                 self.amount = amount 
-                 self.term = term 
-                 self.frequency = frequency 
-                 self.status = status 
-                 self.paymentStatus = paymentStatus 
-                 self.createdAt = createdAt 
-                 self.expirationDate = expirationDate 
-                 self.paymentDueDate = paymentDueDate 
-                 self.dateRepaid = dateRepaid 
-                 self.denomination = denomination 
-                 self.percentFunded = percentFunded 
-                 self.votes = votes 
-                 self.borrower = borrower 
+                    self.id = id
+                    self.title = title
+                    self.description = description
+                    self.amount = amount
+                    self.term = term
+                    self.frequency = frequency
+                    self.status = status
+                    self.paymentStatus = paymentStatus
+                    self.createdAt = createdAt
+                    self.expirationDate = expirationDate
+                    self.paymentDueDate = paymentDueDate
+                    self.dateRepaid = dateRepaid
+                    self.denomination = denomination
+                    self.percentFunded = percentFunded
+                    self.votes = votes
+                    self.borrower = borrower
 
     @classmethod
     def getbyid(cls, json_data):
