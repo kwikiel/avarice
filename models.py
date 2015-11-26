@@ -1,6 +1,8 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import datetime
+from dateutil import parser
+
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
 db = SQLAlchemy(app)
@@ -64,6 +66,7 @@ class Loan(db.Model):
 
     def __init__(self,
                  id,
+                 type,
                  title,
                  description,
                  amount,
@@ -81,6 +84,7 @@ class Loan(db.Model):
                  borrower,
                  rating):
                     self.id = id
+                    self.type = type
                     self.title = title
                     self.description = description
                     self.amount = amount
@@ -88,10 +92,10 @@ class Loan(db.Model):
                     self.frequency = frequency
                     self.status = status
                     self.paymentStatus = paymentStatus
-                    self.createdAt = createdAt
-                    self.expirationDate = expirationDate
-                    self.paymentDueDate = paymentDueDate
-                    self.dateRepaid = dateRepaid
+                    self.createdAt = parser.parse(createdAt)
+                    self.expirationDate = parser.parse(expirationDate)
+                    self.paymentDueDate = parser.parse(paymentDueDate)
+                    self.dateRepaid = parser.parse(dateRepaid)
                     self.denomination = denomination
                     self.percentFunded = percentFunded
                     self.votes = votes
@@ -104,11 +108,29 @@ class Loan(db.Model):
     def __repr__(self, id):
         return '<Loan %r>' % self.id
 
+data ={
+      "id": 7,
+      "type": "Other",
+      "title": "Reputation listing",
+      "description": "I would like to try out BitLendingClub and build my reputation here. I will def pay back all annuities and the full principal. Thanks!!",
+      "amount": "1.00000000",
+      "term": 10,
+      "frequency": 5,
+      "status": "Expired",
+      "paymentStatus": "Current",
+      "createdAt": "2013-06-18T23:59:59.000-04:00",
+      "expirationDate": "2013-07-18T23:59:59.000-04:00",
+      "paymentDueDate": "2013-07-18T23:59:59.000-04:00",
+      "dateRepaid": "2013-07-18T23:59:59.000-04:00",
+      "denomination": "BTC",
+      "percentFunded": 0,
+      "votes": 0,
+      "borrower": 27,
+      "rating": 0,
+    }
+
 db.create_all()
-l = Loan(id=12234,
-         createdAt=datetime.datetime.utcnow(),
-         type="xD",
-         title="ebin")
+l = Loan(**data)
 db.session.add(l)
 db.session.commit()
 l2 = Loan.query.first()
