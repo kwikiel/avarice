@@ -27,14 +27,14 @@ class User(db.Model):
                  trusted_localbitcoins,
                  trusted_ebay,
                  countryId, salary):
-        self.social_facebook = social_facebook
-        self.social_linkedin = social_linkedin
-        self.trusted_paypal = trusted_paypal
-        self.trusted_amazon = trusted_amazon
-        self.trusted_localbitcoins = trusted_localbitcoins
-        self.trusted_ebay = trusted_ebay
-        self.countryId = countryId
-        self.salary = salary
+        self.social_facebook = social_facebook social_facebook
+        self.social_linkedin = social_linkedin social_linkedin
+        self.trusted_paypal = trusted_paypal trusted_paypal
+        self.trusted_amazon = trusted_amazon trusted_amazon
+        self.trusted_localbitcoins = trusted_localbitcoins trusted_localbitcoins
+        self.trusted_ebay = trusted_ebay trusted_ebay
+        self.countryId = countryId countryId
+        self.salary = salary salary
 
     def __repr(self):
         return "<user {0}>".format(self.social_facebook)
@@ -42,6 +42,7 @@ class User(db.Model):
 
 class Loan(db.Model):
     __tablename__ = 'loans'
+
     id = db.Column(db.Integer, primary_key=True)
     type = db.Column(db.String(1200))
     title = db.Column(db.String(1200))
@@ -60,6 +61,45 @@ class Loan(db.Model):
     votes = db.Column(db.Integer())
     borrower = db.Column(db.Integer)
     rating = db.Column(db.Integer())
+
+    def __init__(self,
+                 id,
+                 title,
+                 description,
+                 amount,
+                 term,
+                 frequency,
+                 status,
+                 paymentStatus,
+                 createdAt,
+                 expirationDate,
+                 paymentDueDate,
+                 dateRepaid,
+                 denomination,
+                 percentFunded,
+                 votes,
+                 borrower,
+                 rating):
+                 self.id = id 
+                 self.title = title 
+                 self.description = description 
+                 self.amount = amount 
+                 self.term = term 
+                 self.frequency = frequency 
+                 self.status = status 
+                 self.paymentStatus = paymentStatus 
+                 self.createdAt = createdAt 
+                 self.expirationDate = expirationDate 
+                 self.paymentDueDate = paymentDueDate 
+                 self.dateRepaid = dateRepaid 
+                 self.denomination = denomination 
+                 self.percentFunded = percentFunded 
+                 self.votes = votes 
+                 self.borrower = borrower 
+
+    @classmethod
+    def getbyid(cls, json_data):
+        return cls(**json_data)
 
     def __repr__(self, id):
         return '<Loan %r>' % self.id
