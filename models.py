@@ -61,7 +61,6 @@ class Loan(db.Model):
     percentFunded = db.Column(db.Float())
     votes = db.Column(db.Integer())
     borrower = db.Column(db.Integer)
-    creditScore = db.Column(db.String(40))
 
     def __init__(self,
                  id,
@@ -79,7 +78,7 @@ class Loan(db.Model):
                  percentFunded,
                  votes,
                  borrower,
-                 rating):
+                 ):
                     self.id = id
                     self.type = type
                     self.title = title
@@ -89,11 +88,10 @@ class Loan(db.Model):
                     self.frequency = frequency
                     self.status = status
                     self.paymentStatus = paymentStatus
-                    self.createdAt = parser.parse(createdAt)
-                    self.expirationDate = parser.parse(expirationDate)
+                    self.createdAt = createdAt
+                    self.expirationDate = expirationDate
                     self.denomination = denomination
                     self.percentFunded = percentFunded
-                    self.votes = votes
                     self.borrower = borrower
 
     @classmethod
