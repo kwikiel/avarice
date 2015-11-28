@@ -108,11 +108,3 @@ class Loan(db.Model):
 
     def __repr__(self, id):
         return '<Loan %r>' % self.id
-
-
-db.create_all()
-l = Loan(**data)
-db.session.add(l)
-db.session.commit()
-l2 = Loan.query.first()
-print(l2.id)
