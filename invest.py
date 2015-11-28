@@ -6,6 +6,7 @@ LOG_FILENAME = 'history.log'
 logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
 
 
+
 class Investor:
 
     def __init__(self, secret):
@@ -26,6 +27,7 @@ class Investor:
     def create(self, lid, amount, rate):
         '''
         Investing in given loans
+
         '''
         url = "https://api.loanbase.com/api/investment"
         params = {'loan_id': lid, 'amount': amount, 'rate': rate}
@@ -58,7 +60,7 @@ def brfl(lid):
     solist = sorted(r.json()['investments'], key=lambda x: float(x['rate']))
     max_rate = 1.0
     investments = 0.0
-    requested = 105.0
+    requested = 6
     for idx, i in enumerate(solist):
         investments = investments + float(solist[idx]['amount'])
         if investments >= requested:
@@ -66,4 +68,4 @@ def brfl(lid):
             return max_rate
 
 
-print(brfl(21367))
+print(brfl(21428))

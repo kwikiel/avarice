@@ -20,6 +20,7 @@ class User(db.Model):
     trusted_ebay = db.Column(db.Integer())
     countryId = db.Column(db.String(140))
     salary = db.Column(db.String(140))
+    activeToRepaid = db.Column(db.Float())
 
     def __init__(self, social_facebook,
                  social_linkedin,
@@ -108,26 +109,6 @@ class Loan(db.Model):
     def __repr__(self, id):
         return '<Loan %r>' % self.id
 
-data ={
-      "id": 7,
-      "type": "Other",
-      "title": "Reputation listing",
-      "description": "I would like to try out BitLendingClub and build my reputation here. I will def pay back all annuities and the full principal. Thanks!!",
-      "amount": "1.00000000",
-      "term": 10,
-      "frequency": 5,
-      "status": "Expired",
-      "paymentStatus": "Current",
-      "createdAt": "2013-06-18T23:59:59.000-04:00",
-      "expirationDate": "2013-07-18T23:59:59.000-04:00",
-      "paymentDueDate": "2013-07-18T23:59:59.000-04:00",
-      "dateRepaid": "2013-07-18T23:59:59.000-04:00",
-      "denomination": "BTC",
-      "percentFunded": 0,
-      "votes": 0,
-      "borrower": 27,
-      "rating": 0,
-    }
 
 db.create_all()
 l = Loan(**data)
