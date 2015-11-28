@@ -13,6 +13,7 @@ def loan_byid(lid):
     l = Loan(
         id=pl['id'],
         type=pl['type'],
+        title=pl['title'],
         description=pl['description'],
         amount=float(pl['amount']),
         term=int(pl['term']),
@@ -26,8 +27,7 @@ def loan_byid(lid):
         denomination=pl['denomination'],
         percentFunded=float(pl['percentFunded']),
         votes=int(pl['votes']),
-        borrower=int(pl['borrower']),
-        creditScore=pl['creditScore'])
+        borrower=int(pl['borrower']))
 
     db.session.add(l)
     db.session.commit()
