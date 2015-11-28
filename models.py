@@ -94,6 +94,7 @@ class Loan(db.Model):
                     self.percentFunded = percentFunded
                     self.borrower = borrower
 
+
     @classmethod
     def getbyid(cls, json_data):
         return cls(**json_data)
