@@ -38,4 +38,5 @@ def loan_byid(lid):
         db.session.add(l)
         db.session.commit()
     except:
+        db.session.rollback()
         logger.exception("Cannot get ID")
