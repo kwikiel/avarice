@@ -61,7 +61,7 @@ class Loan(db.Model):
     percentFunded = db.Column(db.Float())
     votes = db.Column(db.Integer())
     borrower = db.Column(db.Integer)
-    rating = db.Column(db.Integer())
+    creditScore = db.Column(db.String(40))
 
     def __init__(self,
                  id,
