@@ -8,9 +8,10 @@ DATAFORMAT = "%Y-%m-%dT%H:%M:%SZ"
 
 
 def loan_byid(lid):
-    raw = requests.get("https://api.loanbase.com/api/loan/"+str(lid))
-    pl = raw.json()['loans'][0]
-    l = Loan(
+    try:
+        raw = requests.get("https://api.loanbase.com/api/loan/"+str(lid))
+        pl = raw.json()['loans'][0]
+        l = Loan(
         id=pl['id'],
         type=pl['type'],
         title=pl['title'],
@@ -28,6 +29,8 @@ def loan_byid(lid):
         percentFunded=float(pl['percentFunded']),
         votes=int(pl['votes']),
         borrower=int(pl['borrower']))
+        db.session.add(l)
+        db.session.commit()
+    except:
+        print("Cannot get ID")
 
-    db.session.add(l)
-    db.session.commit()
