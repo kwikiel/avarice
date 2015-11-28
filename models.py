@@ -58,7 +58,7 @@ class Loan(db.Model):
     createdAt = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     expirationDate = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     denomination = db.Column(db.String(40))
-    percentFunded = db.Column(db.Integer())
+    percentFunded = db.Column(db.Float())
     votes = db.Column(db.Integer())
     borrower = db.Column(db.Integer)
     rating = db.Column(db.Integer())
