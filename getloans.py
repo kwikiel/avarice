@@ -7,11 +7,13 @@ from models import db
 import logging
 
 logger = logging.getLogger(__name__)
-
+logging.basicConfig(level=logging.DEBUG)
 
 def parse_date(datestr):
-    return datetime.datetime.strptime(datestr, '%Y-%m-%dT%H:%M:%SZ').date()
-
+    try:
+        datetime.datetime.strptime(datestr, '%Y-%m-%dT%H:%M:%SZ').date()
+    except:
+        datetime.datetime.strptime(datestr[:-10], '%Y-%m-%dT%H:%M:%S').date()
 
 def loan_byid(lid):
     try:
