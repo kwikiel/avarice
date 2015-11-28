@@ -57,8 +57,6 @@ class Loan(db.Model):
     paymentStatus = db.Column(db.String(140))
     createdAt = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     expirationDate = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    paymentDueDate = db.Column(db.DateTime, default=datetime.datetime.utcnow)
-    dateRepaid = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     denomination = db.Column(db.String(40))
     percentFunded = db.Column(db.Integer())
     votes = db.Column(db.Integer())
@@ -77,8 +75,6 @@ class Loan(db.Model):
                  paymentStatus,
                  createdAt,
                  expirationDate,
-                 paymentDueDate,
-                 dateRepaid,
                  denomination,
                  percentFunded,
                  votes,
@@ -95,8 +91,6 @@ class Loan(db.Model):
                     self.paymentStatus = paymentStatus
                     self.createdAt = parser.parse(createdAt)
                     self.expirationDate = parser.parse(expirationDate)
-                    self.paymentDueDate = parser.parse(paymentDueDate)
-                    self.dateRepaid = parser.parse(dateRepaid)
                     self.denomination = denomination
                     self.percentFunded = percentFunded
                     self.votes = votes
