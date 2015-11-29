@@ -105,3 +105,4 @@ class Investment(db.Model):
     dateInvested = db.Column(db.DateTime, default=datetime.datetime.utcnow)
     investorId = db.Column(db.Integer())
     rate = db.Column(db.Float())
+    loanId = db.Column(db.Integer())
