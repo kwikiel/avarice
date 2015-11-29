@@ -9,13 +9,15 @@ logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
 
 class Investor:
 
-    def __init__(self, secret):
+    def __init__(self, secret, investor_id):
         self.secret = secret
+        self.investor_id = investor_id
 
     def list():
         '''
         Listing own investments (may be slow due to no api for that)
         '''
+        # Query list of investments where investor invested
         pass
 
     def details():
