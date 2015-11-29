@@ -1,7 +1,6 @@
 from flask import Flask
 from flask_sqlalchemy import SQLAlchemy
 import datetime
-from dateutil import parser
 
 app = Flask(__name__)
 app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
@@ -94,10 +93,15 @@ class Loan(db.Model):
                     self.percentFunded = percentFunded
                     self.borrower = borrower
 
-
-    @classmethod
-    def getbyid(cls, json_data):
-        return cls(**json_data)
-
     def __repr__(self, id):
         return '<Loan %r>' % self.id
+
+
+class Investment(db.Model):
+    __tablename__ = 'investments'
+
+    id = db.Column(db.Integer, primary_key=True)
+    amount = db.Column(db.Float)
+    dateInvested = db.Column(db.DateTime, default=datetime.datetime.utcnow)
+    investorId = db.Column(db.Integer())
+    rate = db.Column(db.Float())
