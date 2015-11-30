@@ -3,3 +3,4 @@
 *.ropeproject/
 *.log
 *.swp
+*-journal
