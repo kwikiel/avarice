@@ -28,5 +28,8 @@ def investment_byloan(lid):
             rate=float(i['rate']),
             loanId=int(i['loanId']),
             investorId=int(i['investorId']))
-        db.session.add(inv)
-        db.session.commit()
+        try:
+            db.session.add(inv)
+            db.session.commit()
+        except:
+            db.session.rollback()
