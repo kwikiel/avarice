@@ -106,3 +106,6 @@ class Investment(db.Model):
     investorId = db.Column(db.Integer())
     rate = db.Column(db.Float())
     loanId = db.Column(db.Integer())
+
+    def __repr__(self):
+        return '<Investment {0.id} {0.loanId}>'.format(self)
