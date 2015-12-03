@@ -11,15 +11,16 @@ class User(db.Model):
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     social_facebook = db.Column(db.Integer())
-    social_linkedin = db.column(db.Integer())
-    social_google = db.column(db.Integer())
-    trusted_paypal = db.column(db.Integer())
-    trusted_amazon = db.column(db.Integer())
+    social_linkedin = db.Column(db.Integer())
+    social_google = db.Column(db.Integer())
+    trusted_paypal = db.Column(db.Integer())
+    trusted_amazon = db.Column(db.Integer())
     trusted_localbitcoins = db.Column(db.Integer())
     trusted_ebay = db.Column(db.Integer())
     countryId = db.Column(db.String(140))
     salary = db.Column(db.String(140))
     activeToRepaid = db.Column(db.Float())
+    image = db.Column(db.String(430))  # URL for image or file
 
     def __init__(self, social_facebook,
                  social_linkedin,
@@ -28,7 +29,7 @@ class User(db.Model):
                  trusted_amazon,
                  trusted_localbitcoins,
                  trusted_ebay,
-                 countryId, salary):
+                 countryId, salary, image):
         self.social_facebook = social_facebook
         self.social_linkedin = social_linkedin
         self.trusted_paypal = trusted_paypal
@@ -37,6 +38,7 @@ class User(db.Model):
         self.trusted_ebay = trusted_ebay
         self.countryId = countryId
         self.salary = salary
+        self.image = image
 
     def __repr(self):
         return "<user {0}>".format(self.social_facebook)
