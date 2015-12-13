@@ -3,11 +3,26 @@ from flask_sqlalchemy import SQLAlchemy
 import datetime
 
 app = Flask(__name__)
-app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///test.db'
+app.config['SQLALCHEMY_DATABASE_URI'] = 'postgresql://kacper:password@localhost/ostr'
+app.config['SQLALCHEMY_TRACK_MODIFICATIONS'] = False
 db = SQLAlchemy(app)
 
 
+class Globus(db.Model):
+    __tablename__ = 'globuses'
+
+    id = db.Column(db.Integer, primary_key=True)
+    bitbond = db.Column(db.String(140))
+    loanbase = db.Column(db.String(140))
+    btcjam = db.Column(db.String(140))
+    getline = db.Column(db.String(140))
+
+
+
+
 class User(db.Model):
+
+
     __tablename__ = 'users'
     id = db.Column(db.Integer, primary_key=True)
     social_facebook = db.Column(db.Integer())

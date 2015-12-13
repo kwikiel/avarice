@@ -23,20 +23,23 @@ def investment_byloan(lid):
         r = requests.get("https://api.loanbase.com/api/investments/"+str(lid))
     except:
         print("Cannot get data from API")
-    if r.json()['investments']:
-        try:
-                for i in r.json()['investments']:
-                    inv = Investment(
-                        id=int(i['id']),
-                        amount=float(i['amount']),
-                        dateInvested=parse_date(i['dateInvested']),
-                        rate=float(i['rate']),
-                        loanId=int(i['loanId']),
-                        investorId=int(i['investorId']))
-                    try:
-                        db.session.add(inv)
-                        db.session.commit()
-                    except:
-                        db.session.rollback()
-        except:
-            print("Prolly empty {0}".format(lid))
+    try:
+        if r.json()['investments']:
+            try:
+                    for i in r.json()['investments']:
+                        inv = Investment(
+                            id=int(i['id']),
+                            amount=float(i['amount']),
+                            dateInvested=parse_date(i['dateInvested']),
+                            rate=float(i['rate']),
+                            loanId=int(i['loanId']),
+                            investorId=int(i['investorId']))
+                        try:
+                            db.session.add(inv)
+                            db.session.commit()
+                        except:
+                            db.session.rollback()
+            except:
+                print("Prolly empty {0}".format(lid))
+    except:
+        print "Yolo error"

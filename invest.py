@@ -6,7 +6,6 @@ LOG_FILENAME = 'history.log'
 logging.basicConfig(filename=LOG_FILENAME, level=logging.INFO)
 
 
-
 class Investor:
 
     def __init__(self, secret, investor_id):
@@ -50,24 +49,34 @@ class Investor:
         '''
         pass
 
-    def delete():
+    def delete(self,id):
         '''
         To delete investment
         '''
-        pass
+
+        url = "https://api.loanbase.com/api/investment/"+str(id)
+        params = {'id': id}
+        headers = {
+            'Authorization': 'Bearer ' + self.secret,
+            'Accept': 'application/vnd.blc.v1+json',
+            'Content-Type': 'application/x-www-form-urlencoded'
+            }
+        resp = requests.delete(url, data=params, headers=headers)
+        info = "Deleting ID: {0}"\
+            .format(id)
+        logging.info(strftime("%Y-%m-%d %H:%M:%S", gmtime())+info)
+        print(resp.text)
 
 
 def brfl(lid):
     r = requests.get("https://api.loanbase.com/api/investments/"+str(lid))
+    raw = requests.get("https://api.loanbase.com/api/loan/"+str(lid))
     solist = sorted(r.json()['investments'], key=lambda x: float(x['rate']))
     max_rate = 1.0
     investments = 0.0
-    requested = 6
+    requested = float(raw.json()['loans'][0]['amount'])
     for idx, i in enumerate(solist):
         investments = investments + float(solist[idx]['amount'])
         if investments >= requested:
             max_rate = float(solist[idx-1]['rate'])
             return max_rate
-
-
-print(brfl(21428))
